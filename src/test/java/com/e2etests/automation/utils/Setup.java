@@ -8,12 +8,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+
 import io.cucumber.java.Before;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Setup {
 
 	private static WebDriver driver;
-
+	static WebDriverManager driverManager;
+	
 	/**
 	 * This method is used to open browser. This method is called before the
 	 * invocation of each test method in the given class. In this method we need to
@@ -31,8 +34,9 @@ public class Setup {
 		}
 		switch (browser) {
 		case "chrome":
-			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/win/chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/win/chromedriver.exe");
 			ChromeOptions chromeOptions = new ChromeOptions();
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			chromeOptions.addArguments("['start-maximized']");
@@ -40,6 +44,7 @@ public class Setup {
 		case "firefox":
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/win/geckodriver.exe");
 			FirefoxProfile profile = new FirefoxProfile();
+			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			firefoxOptions.setCapability("platform", Platform.WIN10);
 			firefoxOptions.setProfile(profile);

@@ -1,0 +1,9 @@
+com\e2etests\automation\page_objects\AuthentificationPage.class
+com\e2etests\automation\page_objects\RegistrationPage.class
+com\e2etests\automation\step_definitions\AuthentificationStepDefiniton.class
+com\e2etests\automation\RunWebSuiteTest.class
+com\e2etests\automation\utils\Setup.class
+com\e2etests\automation\utils\SelectFromListUtils.class
+com\e2etests\automation\step_definitions\RegistrationStepDefinition.class
+com\e2etests\automation\utils\ConfigFileReader.class
+com\e2etests\automation\utils\TearDown.class

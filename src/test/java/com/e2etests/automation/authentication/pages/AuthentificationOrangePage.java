@@ -20,29 +20,31 @@ public class AuthentificationOrangePage {
 	public static WebElement btnlogin;
 	
 	/* @FindBy Related To Page Home*/
-	@FindBy(how = How.XPATH, using = "//*[alt=\"profile picture\"]") 
+	@FindBy(how = How.XPATH, using = "//img[@alt='profile picture']") 
 	public static WebElement iconUser;
-	@FindBy(how = How.LINK_TEXT, using = "Logout") 
+	@FindBy(how = How.XPATH, using = "//a[contains(text(),'Logout')]") 
 	public static WebElement btnlogout;
 	
 	/* @FindBy Related To Add User*/
-	@FindBy(how = How.LINK_TEXT, using = "web/index.php/admin/viewAdminModule") 
-	public static WebElement btnAdmin;
-	@FindBy(how = How.LINK_TEXT, using = " Add ") 
+	
+	@FindBy(how = How.XPATH, using = "//button[contain(text(),'ADD')]") 
 	public static WebElement btnAdd;
-	@FindBy(how = How.LINK_TEXT, using = "web/index.php/admin/viewAdminModule") 
+	@FindBy(how = How.XPATH, using = "//body/div[@id='app']/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/div[1]/div[1]/div[4]/div[1]/div[2]/input[1]") 
 	public static WebElement newUserName;
-	@FindBy(how = How.LINK_TEXT, using = " Add ") 
+	@FindBy(how = How.XPATH, using = "//body/div[@id='app']/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/div[2]/div[1]/div[2]/div[1]/div[2]/input[1]") 
 	public static WebElement newPassword;
-	@FindBy(how = How.LINK_TEXT, using = "web/index.php/admin/viewAdminModule") 
+	@FindBy(how = How.XPATH, using = "//body/div[@id='app']/div[1]/div[2]/div[2]/div[1]/div[1]/form[1]/div[2]/div[1]/div[1]/div[1]/div[2]/input[1]") 
 	public static WebElement confirmPassword;
-	@FindBy(how = How.LINK_TEXT, using = "ESS") 
+	@FindBy(how = How.XPATH, using = "//div[contains(text(),'ESS')]") 
 	public static WebElement userRole;
-	@FindBy(how = How.LINK_TEXT, using = "Enabled") 
+	@FindBy(how = How.XPATH, using = "//button[contain(text(),'Enabled')]") 
 	public static WebElement status;
 	@FindBy(how = How.XPATH, using = "//*[placeholder=\"Type for hints...\"]") 
 	public static WebElement employeeName;
-	
+	@FindBy(how = How.XPATH, using = "//button[contain(text(),'Admin')]") 
+	public static WebElement btnAdmin;
+	@FindBy(how = How.XPATH, using = "//button[contain(text(),'Save')]") 
+	public static WebElement btnsave;
 	/**/
 	public AuthentificationOrangePage() {
 		PageFactory.initElements(Setup.getDriver(), this);
@@ -51,25 +53,23 @@ public class AuthentificationOrangePage {
 	public void goToUrl() {
 		Setup.getDriver().get(configFileReader.getProperties("home.orange"));
 	}
-	public void fillUserName(String name) {
-		userName.sendKeys(name);
+	public void fillText(String name , WebElement e) {
+		e.sendKeys(name);
 	}
 	
-	public void fillPassword(String passwordText) {
-		password.sendKeys(passwordText);
-	}
 	
-	public void clickOnBtnLogin() {
-		btnlogin.click();
+	public void clickOnButton(WebElement e) {
+		e.click();
 	}
 	public Boolean loginSuccess() {
-		return (Setup.getDriver().getPageSource().contains("user"));
+		return (Setup.getDriver().getPageSource().contains(configFileReader.getProperties("user")));
 	}
 	
-	public void selectStatus(String statusValue) {
-		
+	public Boolean addDone() {
+		return (Setup.getDriver().getPageSource().contains("Adam"));
 	}
-	public void selectEmployeeName(String empName) {
-		
+	public String homeUrl() {
+		return configFileReader.getProperties("home.orange");
 	}
+	
 }
